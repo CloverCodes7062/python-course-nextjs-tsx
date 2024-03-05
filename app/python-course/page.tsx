@@ -23,13 +23,13 @@ export default async function pythonCourse() {
     return (
         <>
             <header>
-                <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                    <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+                <nav className="w-screen flex justify-end border-b border-b-foreground/10 h-16">
+                    <div className="max-w-4xl flex justify-between items-center p-3 text-sm">
                     <AuthButton />
                     </div>
                 </nav>
             </header>
-            <h1>Welcome to the python course!</h1>
+            <h1 className="fixed top-[15px] font-semibold text-3xl">Welcome to the python course!</h1>
             <main className="min-h-screen flex flex-col justify-center">
                 <div className="bg-gray-100 h-full w-auto flex justify-center items-center">
                     <ul className="w-[600px]">

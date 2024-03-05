@@ -27,17 +27,17 @@ export default async function() {
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 1: Variables;</span> What they are and how they work</p>
                         </li>
                     </a>
-                    <a>
+                    <a href="/python-course/chapter-1/section-2"> 
                         <li>
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 2: Basic Math;</span> How python handles basic arithmetic operators/operations</p>
                         </li>
                     </a>
-                    <a>
+                    <a href="/python-course/chapter-1/section-3">
                         <li>
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 3: User Input;</span> How to get and use input from a user</p>
                         </li>
                     </a>
-                    <a>
+                    <a href="/python-course/chapter-1/section-4">
                         <li>
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 4: Conditional Statements;</span> What are conditional statements and how to use them</p>
                         </li>    
