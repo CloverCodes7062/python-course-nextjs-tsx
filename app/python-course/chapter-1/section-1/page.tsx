@@ -1,3 +1,4 @@
+import PythonCodeForm from "@/components/PythonCodeForm";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -91,12 +92,21 @@ export default async function() {
                     </div>
 
                     <div className="mt-[50px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">
-                        <div className="text-2xl p-[10px] pb-[25px] text-left bg-red rounded-lg">
-                            <h1 className="text-white font-medium">Exercise:</h1>
-                            <h2 className="text-white font-medium">Print To Console</h2>
+                        <div className="relative flex justify-between text-2xl p-[10px] pb-[25px] text-left bg-red rounded-lg">
+                            <div>
+                                <h1 className="text-white font-medium">Exercise:</h1>
+                                <h2 className="text-white font-medium">Print To Console</h2>
+                            </div>
+                            <div>
+                                <h2 className="text-white font-medium">Points:</h2>
+                                <p className="text-white text-right font-medium">0/1</p>
+                            </div>
                         </div>
                         <div>
                             <p className="text-pretty mt-[10px] text-lg w-[700px]">We've talked enough about variables and print(), it's time to write some code! Create a fews variables and try outputting to the console with print(). Also try using print() on a non variable, print("cat"). Don't worry if you get errors, we'll discuss those shortly</p>
+                        </div>
+                        <div>
+                            <PythonCodeForm />
                         </div>
                     </div>
                 </main>
