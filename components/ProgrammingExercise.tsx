@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import PythonCodeForm from "./PythonCodeForm";
 import QuestionLoading from "./QuestionLoading";
 
@@ -15,19 +15,50 @@ interface Props {
     questionTitle: string;
     questionDescription: string;
     pointsWorth: number;
-    setOutput: Dispatch<SetStateAction<null>>;
-    setRanCode: Dispatch<SetStateAction<boolean>>;
-    setRenderLoading: Dispatch<SetStateAction<boolean>>;
-    ranCode: boolean;
-    renderLoading: boolean;
-    output: any;
-    isResultOutput: (output: { result?: string, err?: string }) => output is { result: string };
+    neededOutput: string;
+    setQuestionsCompleted: Dispatch<SetStateAction<QuestionCompletedData[]>>;
 }
 
-export default function ProgrammingExercise({ 
-    questionsCompleted, questionNumber, questionTitle, 
-    questionDescription, pointsWorth, setOutput, setRanCode, 
-    setRenderLoading, ranCode, renderLoading, output, isResultOutput }: Props) {
+export default function ProgrammingExercise({ questionsCompleted, setQuestionsCompleted, questionNumber, questionTitle, questionDescription, pointsWorth, neededOutput }: Props) {
+        const [output, setOutput] = useState(null);
+        const [renderLoading, setRenderLoading] = useState(true);
+        const [ranCode, setRanCode] = useState(false);
+        
+        useEffect(() => {
+            if (output) {
+                setRenderLoading(false);
+            }
+        }, [output]);
+
+        const isResultOutput = (output: { result?: string, err?: string }): output is { result: string } => {
+            const checkIfOutputSuccessful = async () => {
+                if (output.hasOwnProperty('result')) {
+                    if (!neededOutput) {
+                        const response = await fetch('http://localhost:3000/api/postQuestionResult', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
+                        });
+                        setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
+                    } else if (neededOutput == output.result) {
+                        const response = await fetch('http://localhost:3000/api/postQuestionResult', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
+                        });
+                        setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
+                    }
+                }
+            }
+    
+            checkIfOutputSuccessful();
+    
+            return output.hasOwnProperty('result');
+        }
 
         return (
             <div className="mt-[50px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">

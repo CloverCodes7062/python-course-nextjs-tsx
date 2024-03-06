@@ -12,6 +12,7 @@ import StandardTitleH1 from "@/components/StandardTitleH1";
 import StandardLearningObjectivesContainer from "@/components/StandardLearningObjectivesContainer";
 import StandardLi from "@/components/StandardLi";
 import KeyPointsContainer from "@/components/KeyPointsContainer";
+import ProgrammingExercise from "@/components/ProgrammingExercise";
 
 interface QuestionCompletedData {
     question: string;
@@ -19,11 +20,6 @@ interface QuestionCompletedData {
 }
 
 export default function() {
-    const [outputSuccess, setOutputSuccess] = useState(false);
-    const [output, setOutput] = useState(null);
-    const [renderLoading, setRenderLoading] = useState(true);
-    const [ranCode, setRanCode] = useState(false);
-
     const router = useRouter();
 
     const [questionsCompleted, setQuestionsCompleted] = useState<QuestionCompletedData[]>([]);
@@ -55,30 +51,6 @@ export default function() {
         checkSession();
 
     }, [router]);
-    
-    useEffect(() => {
-        if (output) {
-            setRenderLoading(false);
-        }
-    }, [output]);
-
-    const isResultOutput = (output: { result?: string, err?: string }): output is { result: string } => {
-        const checkIfOutputSuccessful = async () => {
-            if (output.hasOwnProperty('result')) {
-                const response = await fetch('http://localhost:3000/api/postQuestionResult', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ question: '1-1-1', points_worth: 1 }),
-                })
-            }
-        }
-
-        checkIfOutputSuccessful();
-
-        return output.hasOwnProperty('result');
-    }
 
     return (
         <div>
@@ -165,53 +137,15 @@ export default function() {
                     <StandardContainer>
                         <p className="font-medium">5</p>
                     </StandardContainer>
-                    <div className="mt-[50px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">
-                        <div className={`relative flex justify-between text-2xl p-[12.5px] pb-[25px] text-left rounded-t-lg ${questionsCompleted.some(q => q.question === "1-1-1") ? 'bg-green-500' : 'bg-red'}`}>
-                            <div>
-                                <h1 className="text-white font-medium text-lg">Programming Exercise:</h1>
-                                <h2 className="indent-[25px] text-white font-medium">Print To Console</h2>
-                            </div>
-                            <div>
-                                <h2 className="text-white font-medium">Points:</h2>
-                                <p className="text-white text-right font-medium">{questionsCompleted.some(q => q.question === "1-1-1") ? '1/1' : '0/1'}</p>
-                            </div>
-                        </div>
-                        <div className="p-[10px] pl-[25px] pb-[20px]">
-                            <p className="text-pretty mt-[10px] text-lg w-[700px]">We've talked enough about variables and print(), it's time to write some code! Create a fews variables and try outputting to the console with print(). Also try using print() on a non variable, print("cat"). Don't worry if you get errors, we'll discuss those shortly.</p>
-                        </div>
-
-                        <div>
-                            <PythonCodeForm setOutput={setOutput} setRanCode={setRanCode} setRenderLoading={setRenderLoading}/>
-                        </div>
-                        <div>
-                            <div className="pl-[10px] pr-[10px] mt-[15px] mb-[15px] ml-[10px] mr-[10px] flex items-center justify-between bg-output-gray rounded-lg shadow-lg">
-                                <h2 className="text-xl font-medium">Test Results: </h2>
-                                <button className="p-[7.5px] ml-[10px] mt-[5px] mb-[10px] bg-test-gray rounded-lg shadow-lg">Close</button>
-                            </div>
-                        </div>
-                        {ranCode && 
-                            <div>
-                                {renderLoading && <QuestionLoading />}
-                                <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
-                                    <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
-                                        output
-                                            ? isResultOutput(output)
-                                                ? 'border-l-green-500 border-l-4'
-                                                : 'border-l-red border-l-4'
-                                            : ''
-                                        } flex items-center`}>
-                                        {output ? 
-                                            isResultOutput(output) ? (
-                                                <p className="res">{(output as { result: string }).result}</p>
-                                            ) : (
-                                                <p className="err">{(output as { err: string }).err}</p>
-                                            )
-                                        : null}
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <ProgrammingExercise
+                        questionsCompleted={questionsCompleted}
+                        setQuestionsCompleted={setQuestionsCompleted}
+                        questionNumber={"1-1-1"}
+                        questionTitle={"Print To Console"}
+                        questionDescription={"We've talked enough about variables and print(), it's time to write some code! Create a fews variables and try outputting to the console with print(). Also try using print() on a non variable, print('cat'). Don't worry if you get errors, we'll discuss those shortly."}
+                        pointsWorth={1}
+                        neededOutput={''}
+                    />
                     <KeyPointsContainer>
                         <StandardLi>A variable is a<span className="italic font-medium"> letter or word </span> (can also be multiple words; this_is_a_variable)</StandardLi>
                         <StandardLi>Variables can be created using the <span className="italic font-medium">assignment operator</span> (=)</StandardLi>
