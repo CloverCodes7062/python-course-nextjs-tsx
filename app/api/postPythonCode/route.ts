@@ -7,6 +7,7 @@ export async function POST(req: any, res: any) {
     const { code } = body;
 
     let output = '';
+    let err = '';
 
     const docker = spawn('docker', ['run', '--rm', '-i', '00e07589691a']);
     docker.stdin.write(code);
@@ -20,20 +21,28 @@ export async function POST(req: any, res: any) {
         
         docker.stderr.on('data', (data) => {
             console.error(`stderr: ${data}`);
-            reject(data);
+            err = data.toString();
         });
     
         docker.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
-            resolve(output);
+            if (err) {
+                reject(err);
+            } else {
+                resolve(output);
+            }
         });
     });
 
     try {
-        const result = await promise;
-        return new Response(JSON.stringify({ result: result }));
+        const res = await promise;
+        if (output.length >= 6 && output.slice(0,5) == "Error") {
+            console.log('err found in res', output.slice(0, 5));
+            return new Response(JSON.stringify({ err: res }));
+        }
+        return new Response(JSON.stringify({ result: res }));
     } catch (error) {
         console.error('An error occurred running the code:', error);
-        return new Response(JSON.stringify({ result: 'not ran' }));
+        return new Response(JSON.stringify({ err: err }));
     }
 }

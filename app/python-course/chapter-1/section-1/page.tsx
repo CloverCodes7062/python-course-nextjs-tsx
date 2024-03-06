@@ -1,20 +1,23 @@
+'use client';
 import PythonCodeForm from "@/components/PythonCodeForm";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export const metadata = {
-    title: "Chapter 1.1: Variables",
-};
+export default function() {
+    const [outputSuccess, setOutputSuccess] = useState(false);
+    const [output, setOutput] = useState(null);
+    const [renderLoading, setRenderLoading] = useState(true);
+    const [ranCode, setRanCode] = useState(false);
+    
+    useEffect(() => {
+        if (output) {
+            setRenderLoading(false);
+        }
+    }, [output]);
 
-export default async function() {
-    const supabase = createClient();
-
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
-      
-      if (!user) {
-        return redirect("/login");
+    function isResultOutput(output: { result?: string, err?: string }): output is { result: string } {
+        return output.hasOwnProperty('result');
     }
 
     return (
@@ -92,22 +95,81 @@ export default async function() {
                     </div>
 
                     <div className="mt-[50px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">
-                        <div className="relative flex justify-between text-2xl p-[10px] pb-[25px] text-left bg-red rounded-lg">
+                        <div className="relative flex justify-between text-2xl p-[12.5px] pb-[25px] text-left bg-red rounded-t-lg">
                             <div>
-                                <h1 className="text-white font-medium">Exercise:</h1>
-                                <h2 className="text-white font-medium">Print To Console</h2>
+                                <h1 className="text-white font-medium text-lg">Programming Exercise:</h1>
+                                <h2 className="indent-[25px] text-white font-medium">Print To Console</h2>
                             </div>
                             <div>
                                 <h2 className="text-white font-medium">Points:</h2>
                                 <p className="text-white text-right font-medium">0/1</p>
                             </div>
                         </div>
+                        <div className="p-[10px] pl-[25px] pb-[20px]">
+                            <p className="text-pretty mt-[10px] text-lg w-[700px]">We've talked enough about variables and print(), it's time to write some code! Create a fews variables and try outputting to the console with print(). Also try using print() on a non variable, print("cat"). Don't worry if you get errors, we'll discuss those shortly.</p>
+                        </div>
+
                         <div>
-                            <p className="text-pretty mt-[10px] text-lg w-[700px]">We've talked enough about variables and print(), it's time to write some code! Create a fews variables and try outputting to the console with print(). Also try using print() on a non variable, print("cat"). Don't worry if you get errors, we'll discuss those shortly</p>
+                            <PythonCodeForm setOutput={setOutput} setRanCode={setRanCode} setRenderLoading={setRenderLoading}/>
                         </div>
                         <div>
-                            <PythonCodeForm />
+                            <div className="pl-[10px] pr-[10px] mt-[15px] mb-[15px] ml-[10px] mr-[10px] flex items-center justify-between bg-output-gray rounded-lg shadow-lg">
+                                <h2 className="text-xl font-medium">Test Results: </h2>
+                                <button className="p-[7.5px] ml-[10px] mt-[5px] mb-[10px] bg-test-gray rounded-lg shadow-lg">Close</button>
+                            </div>
                         </div>
+                        {ranCode &&
+                        <div>
+                            {renderLoading && 
+                            <div className="w-full flex justify-center">
+                                <div className="flex justify-center w-[100px]">
+                                    <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                        viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
+                                        <circle fill="#000" stroke="none" cx="6" cy="50" r="6">
+                                            <animate
+                                            attributeName="opacity"
+                                            dur="1s"
+                                            values="0;1;0"
+                                            repeatCount="indefinite"
+                                            begin="0.1"/>    
+                                        </circle>
+                                        <circle fill="#000" stroke="none" cx="26" cy="50" r="6">
+                                            <animate
+                                            attributeName="opacity"
+                                            dur="1s"
+                                            values="0;1;0"
+                                            repeatCount="indefinite" 
+                                            begin="0.2"/>       
+                                        </circle>
+                                        <circle fill="#000" stroke="none" cx="46" cy="50" r="6">
+                                            <animate
+                                            attributeName="opacity"
+                                            dur="1s"
+                                            values="0;1;0"
+                                            repeatCount="indefinite" 
+                                            begin="0.3"/>     
+                                        </circle>
+                                    </svg>
+                                </div>
+                            </div>}
+                            <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
+                                <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
+                                    output
+                                        ? isResultOutput(output)
+                                            ? 'border-l-green-500 border-l-4'
+                                            : 'border-l-red border-l-4'
+                                        : ''
+                                    } flex items-center`}>
+                                    {output ? 
+                                        isResultOutput(output) ? (
+                                            <p className="res">{(output as { result: string }).result}</p>
+                                        ) : (
+                                            <p className="err">{(output as { err: string }).err}</p>
+                                        )
+                                    : null}
+                                </div>
+                            </div>
+                        </div>}
                     </div>
                 </main>
             </div>
