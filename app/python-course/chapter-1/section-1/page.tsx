@@ -1,7 +1,7 @@
 'use client';
 import PythonCodeForm from "@/components/PythonCodeForm";
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export default function() {
@@ -9,6 +9,21 @@ export default function() {
     const [output, setOutput] = useState(null);
     const [renderLoading, setRenderLoading] = useState(true);
     const [ranCode, setRanCode] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const response = await fetch('http://localhost:3000/api/getSession');
+            const data = await response.json();
+
+            if (data?.result != "authenticated") {
+                router.push('/login');
+            }
+        };
+
+        checkSession();
+
+    }, [router]);
     
     useEffect(() => {
         if (output) {
@@ -82,7 +97,7 @@ export default function() {
                         <p className="font-medium">y = "dog"</p>
                         <p className="font-medium">z = x + y</p>
                     </div>
-                    <p className="text-pretty mt-[10px] text-lg w-[700px]">What value is assigned to z? Correct, z is assigned the value "catdog". Everything on the right side of the = is computed first, but since we can't "add" strings, we concatenate them; x ("cat") + y ("dog") = "catdog" and then "catdog" assigned to z.</p>
+                    <p className="text-pretty mt-[10px] text-lg w-[700px]">What value is assigned to z? Correct, z is assigned the value "catdog". Everything on the right side of the = is computed first, but since we can't "add" strings, we <span className="italic font-medium">concatenate</span> them; x ("cat") + y ("dog") = "catdog" and then "catdog" assigned to z.</p>
                     <p className="text-pretty mt-[25px] text-lg w-[700px]">Eariler, and in the learning objectives, <span className="italic font-medium">print()</span> is mentioned. print() is a <span className="italic font-medium">function</span> that takes a value and outputs it to the <span className="italic font-medium">console</span>. Note that the value does not have to be a variable.</p>
                     <p className="text-pretty mt-[10px] text-lg w-[700px]">Let's look at an example:</p>
                     <div className="mt-[10px] p-[10px] pt-[15px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">
