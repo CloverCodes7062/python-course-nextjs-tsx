@@ -2,22 +2,46 @@
 import PythonCodeForm from "@/components/PythonCodeForm";
 import { createClient } from "@/utils/supabase/server";
 import { redirect, useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import Head from 'next/head';
+import QuestionLoading from "@/components/QuestionLoading";
+
+interface QuestionCompletedData {
+    question: string;
+    points_worth: number;
+}
 
 export default function() {
     const [outputSuccess, setOutputSuccess] = useState(false);
     const [output, setOutput] = useState(null);
     const [renderLoading, setRenderLoading] = useState(true);
     const [ranCode, setRanCode] = useState(false);
+
     const router = useRouter();
+
+    const [questionsCompleted, setQuestionsCompleted] = useState<QuestionCompletedData[]>([]);
+    const alreadySetQuestions = useRef(false);
 
     useEffect(() => {
         const checkSession = async () => {
             const response = await fetch('http://localhost:3000/api/getSession');
             const data = await response.json();
 
-            if (data?.result != "authenticated") {
+            if (data?.role != "authenticated") {
                 router.push('/login');
+            }
+            
+            if (!alreadySetQuestions.current) {
+                alreadySetQuestions.current = true;
+
+                const questionsCompletedRes = await fetch('http://localhost:3000/api/getCompletedQuestions?chapterSection=1-1');
+                const questionsCompletedData = await questionsCompletedRes.json();
+
+                console.log('questionsCompletedData?.questionsCompleted', questionsCompletedData?.questionsCompleted);
+
+                await questionsCompletedData?.questionsCompleted.forEach((element: any) => {
+                    setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: element.question, points_worth: element.points_worth }]);
+                });
             }
         };
 
@@ -31,8 +55,47 @@ export default function() {
         }
     }, [output]);
 
-    function isResultOutput(output: { result?: string, err?: string }): output is { result: string } {
+    const isResultOutput = (output: { result?: string, err?: string }): output is { result: string } => {
+        const checkIfOutputSuccessful = async () => {
+            if (output.hasOwnProperty('result')) {
+                const response = await fetch('http://localhost:3000/api/postQuestionResult', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: '1-1-1', points_worth: 1 }),
+                })
+            }
+        }
+
+        checkIfOutputSuccessful();
+
         return output.hasOwnProperty('result');
+    }
+
+    function UnderRunCode() {
+        return (
+            <div>
+            {renderLoading && <QuestionLoading />}
+                <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
+                    <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
+                        output
+                            ? isResultOutput(output)
+                                ? 'border-l-green-500 border-l-4'
+                                : 'border-l-red border-l-4'
+                            : ''
+                        } flex items-center`}>
+                        {output ? 
+                            isResultOutput(output) ? (
+                                <p className="res">{(output as { result: string }).result}</p>
+                            ) : (
+                                <p className="err">{(output as { err: string }).err}</p>
+                            )
+                        : null}
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -110,14 +173,14 @@ export default function() {
                     </div>
 
                     <div className="mt-[50px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">
-                        <div className="relative flex justify-between text-2xl p-[12.5px] pb-[25px] text-left bg-red rounded-t-lg">
+                        <div className={`relative flex justify-between text-2xl p-[12.5px] pb-[25px] text-left rounded-t-lg ${questionsCompleted.some(q => q.question === "1-1-1") ? 'bg-green-500' : 'bg-red'}`}>
                             <div>
                                 <h1 className="text-white font-medium text-lg">Programming Exercise:</h1>
                                 <h2 className="indent-[25px] text-white font-medium">Print To Console</h2>
                             </div>
                             <div>
                                 <h2 className="text-white font-medium">Points:</h2>
-                                <p className="text-white text-right font-medium">0/1</p>
+                                <p className="text-white text-right font-medium">{questionsCompleted.some(q => q.question === "1-1-1") ? '1/1' : '0/1'}</p>
                             </div>
                         </div>
                         <div className="p-[10px] pl-[25px] pb-[20px]">
@@ -133,58 +196,7 @@ export default function() {
                                 <button className="p-[7.5px] ml-[10px] mt-[5px] mb-[10px] bg-test-gray rounded-lg shadow-lg">Close</button>
                             </div>
                         </div>
-                        {ranCode &&
-                        <div>
-                            {renderLoading && 
-                            <div className="w-full flex justify-center">
-                                <div className="flex justify-center w-[100px]">
-                                    <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                        viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
-                                        <circle fill="#000" stroke="none" cx="6" cy="50" r="6">
-                                            <animate
-                                            attributeName="opacity"
-                                            dur="1s"
-                                            values="0;1;0"
-                                            repeatCount="indefinite"
-                                            begin="0.1"/>    
-                                        </circle>
-                                        <circle fill="#000" stroke="none" cx="26" cy="50" r="6">
-                                            <animate
-                                            attributeName="opacity"
-                                            dur="1s"
-                                            values="0;1;0"
-                                            repeatCount="indefinite" 
-                                            begin="0.2"/>       
-                                        </circle>
-                                        <circle fill="#000" stroke="none" cx="46" cy="50" r="6">
-                                            <animate
-                                            attributeName="opacity"
-                                            dur="1s"
-                                            values="0;1;0"
-                                            repeatCount="indefinite" 
-                                            begin="0.3"/>     
-                                        </circle>
-                                    </svg>
-                                </div>
-                            </div>}
-                            <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
-                                <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
-                                    output
-                                        ? isResultOutput(output)
-                                            ? 'border-l-green-500 border-l-4'
-                                            : 'border-l-red border-l-4'
-                                        : ''
-                                    } flex items-center`}>
-                                    {output ? 
-                                        isResultOutput(output) ? (
-                                            <p className="res">{(output as { result: string }).result}</p>
-                                        ) : (
-                                            <p className="err">{(output as { err: string }).err}</p>
-                                        )
-                                    : null}
-                                </div>
-                            </div>
-                        </div>}
+                        {ranCode && <UnderRunCode />}
                     </div>
                 </main>
             </div>
