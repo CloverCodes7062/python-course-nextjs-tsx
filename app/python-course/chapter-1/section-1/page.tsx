@@ -10,7 +10,8 @@ import Pmt25 from "@/components/Pmt25";
 import Pmt10 from "@/components/Pmt10";
 import StandardTitleH1 from "@/components/StandardTitleH1";
 import StandardLearningObjectivesContainer from "@/components/StandardLearningObjectivesContainer";
-import LearningObjectiveLi from "@/components/LearningObjectiveLi";
+import StandardLi from "@/components/StandardLi";
+import KeyPointsContainer from "@/components/KeyPointsContainer";
 
 interface QuestionCompletedData {
     question: string;
@@ -79,40 +80,15 @@ export default function() {
         return output.hasOwnProperty('result');
     }
 
-    function UnderRunCode() {
-        return (
-            <div>
-            {renderLoading && <QuestionLoading />}
-                <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
-                    <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
-                        output
-                            ? isResultOutput(output)
-                                ? 'border-l-green-500 border-l-4'
-                                : 'border-l-red border-l-4'
-                            : ''
-                        } flex items-center`}>
-                        {output ? 
-                            isResultOutput(output) ? (
-                                <p className="res">{(output as { result: string }).result}</p>
-                            ) : (
-                                <p className="err">{(output as { err: string }).err}</p>
-                            )
-                        : null}
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div>
             <StandardTitleH1>Chapter 1.1: Variables</StandardTitleH1>
             <div className="flex flex-col items-center">
                 <StandardLearningObjectivesContainer>
-                    <LearningObjectiveLi>You will understand what a variable is</LearningObjectiveLi>
-                    <LearningObjectiveLi>You will understand how to create a variable.</LearningObjectiveLi>
-                    <LearningObjectiveLi>You will understand how to use a variable</LearningObjectiveLi>
-                    <LearningObjectiveLi>You will understand how to output to the console</LearningObjectiveLi>
+                    <StandardLi>You will understand what a variable is</StandardLi>
+                    <StandardLi>You will understand how to create a variable.</StandardLi>
+                    <StandardLi>You will understand how to use a variable</StandardLi>
+                    <StandardLi>You will understand how to output to the console</StandardLi>
                 </StandardLearningObjectivesContainer>
                 <main className="w-full mt-[40px] mb-[40px]">
                     <h1 className="text-left text-2xl font-medium">So what is a variable?</h1>
@@ -189,7 +165,6 @@ export default function() {
                     <StandardContainer>
                         <p className="font-medium">5</p>
                     </StandardContainer>
-
                     <div className="mt-[50px] pb-[15px] w-full flex flex-col justify-center border-2 border-gray-200 rounded-lg shadow-lg">
                         <div className={`relative flex justify-between text-2xl p-[12.5px] pb-[25px] text-left rounded-t-lg ${questionsCompleted.some(q => q.question === "1-1-1") ? 'bg-green-500' : 'bg-red'}`}>
                             <div>
@@ -214,18 +189,35 @@ export default function() {
                                 <button className="p-[7.5px] ml-[10px] mt-[5px] mb-[10px] bg-test-gray rounded-lg shadow-lg">Close</button>
                             </div>
                         </div>
-                        {ranCode && <UnderRunCode />}
+                        {ranCode && 
+                            <div>
+                                {renderLoading && <QuestionLoading />}
+                                <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
+                                    <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
+                                        output
+                                            ? isResultOutput(output)
+                                                ? 'border-l-green-500 border-l-4'
+                                                : 'border-l-red border-l-4'
+                                            : ''
+                                        } flex items-center`}>
+                                        {output ? 
+                                            isResultOutput(output) ? (
+                                                <p className="res">{(output as { result: string }).result}</p>
+                                            ) : (
+                                                <p className="err">{(output as { err: string }).err}</p>
+                                            )
+                                        : null}
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
-
-                    <div className="mt-[50px] pb-[15px] w-full">
-                        <h1 className="text-2xl font-medium">Lession Key Points:</h1>
-                        <ul>
-                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span> A variable is a<span className="italic font-medium"> letter or word </span> (can also be multiple words; this_is_a_variable)</li>
-                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span> Variables can be created using the <span className="italic font-medium">assignment operator</span> (=)</li>
-                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span> Integers are <span className="italic font-medium">added</span> (5 + 4 = 9) using (+), while strings are <span className="italic font-medium">concatenated</span> ("cat" + "dog" = "catdog")</li>
-                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span> You can output to the console using <span className="italic font-medium">print()</span></li>
-                        </ul>
-                    </div>
+                    <KeyPointsContainer>
+                        <StandardLi>A variable is a<span className="italic font-medium"> letter or word </span> (can also be multiple words; this_is_a_variable)</StandardLi>
+                        <StandardLi>Variables can be created using the <span className="italic font-medium">assignment operator</span> (=)</StandardLi>
+                        <StandardLi>Integers are <span className="italic font-medium">added</span> (5 + 4 = 9) using (+), while strings are <span className="italic font-medium">concatenated</span> ("cat" + "dog" = "catdog")</StandardLi>
+                        <StandardLi>You can output to the console using <span className="italic font-medium">print()</span></StandardLi>
+                    </KeyPointsContainer>
                 </main>
             </div>
         </div>
