@@ -198,6 +198,16 @@ export default function() {
                         </div>
                         {ranCode && <UnderRunCode />}
                     </div>
+
+                    <div className="mt-[50px] pb-[15px] w-full">
+                        <h1 className="text-2xl font-medium">Lession Key Points:</h1>
+                        <ul>
+                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span>A variable is a<span className="italic font-medium"> letter or word </span> (can also be multiple words; this_is_a_variable)</li>
+                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span>Variables can be created using the <span className="italic font-medium">assignment operator</span> (=)</li>
+                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span>Integers are <span className="italic font-medium">added</span> (5 + 4 = 9) using (+), while strings are <span className="italic font-medium">concatenated</span> ("cat" + "dog" = "catdog")</li>
+                            <li className="indent-[25px]"><span className="text-2xl">&bull;</span>You can output to the console using <span className="italic font-medium">print()</span></li>
+                        </ul>
+                    </div>
                 </main>
             </div>
         </div>
