@@ -30,6 +30,7 @@ export default function ProgrammingExercise({ questionsCompleted, setQuestionsCo
 
                 if (output.result) {
                     const checkIfOutputIsValid = async () => {
+                        console.log('neededOutput', neededOutput);
                         if (!neededOutput) {
                             console.log("calling API ROUTE1");
                             const response = await fetch('http://localhost:3000/api/postQuestionResult', {
@@ -40,16 +41,20 @@ export default function ProgrammingExercise({ questionsCompleted, setQuestionsCo
                                 body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
                             });
                             setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
-                        } else if (neededOutput == output.result) {
-                            console.log("calling API ROUTE2");
-                            const response = await fetch('http://localhost:3000/api/postQuestionResult', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
-                            });
-                            setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
+                        } else {
+                            console.log('neededOutput from !notneededOutput', neededOutput);
+                            console.log('output.result', output.result);
+                            if (neededOutput == output.result) {
+                                console.log("calling API ROUTE2");
+                                const response = await fetch('http://localhost:3000/api/postQuestionResult', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
+                                });
+                                setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
+                            }
                         }
                     }
 
@@ -104,26 +109,35 @@ export default function ProgrammingExercise({ questionsCompleted, setQuestionsCo
                     </div>
                 </div>
                 {ranCode && (
-                    <div>
-                        {renderLoading && <QuestionLoading />}
-                        <div className="pt-[25px] pd-[25px] pr-[15px] pl-[15px] flex items-center">
-                            <div
-                                className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
-                                    output
-                                        ? isResultOutput(output)
-                                            ? 'border-l-green-500 border-l-4'
-                                            : 'border-l-red border-l-4'
-                                        : ''
-                                } flex items-center`}
-                            >
-                                {output
-                                    ? isResultOutput(output)
-                                        ? <p className="res">{(output as { result: string }).result}</p>
-                                        : <p className="err">{(output as { err: string }).err}</p>
-                                    : null}
-                            </div>
-                        </div>
+                <div>
+                    {renderLoading && <QuestionLoading />}
+                    <div className={`p-[10px] w-full h-full rounded-lg shadow-lg border-2 border-gray-200 ${
+                    output
+                        ? isResultOutput(output)
+                            ? 'border-l-green-500 border-l-4'
+                            : 'border-l-red border-l-4'
+                        : ''
+                    } flex items-center`}
+                    >
+                        {output ? (
+                            output.result ? (
+                                (output.result == neededOutput || (output.result && !neededOutput)) ? (
+                                    <p className="res">Your output: {output.result}</p>
+                                ) : (
+                                    <div>
+                                        <p className="err">Your output: {output.result}</p>
+                                        <p className="err">Expected output: {neededOutput}</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div>
+                                    <p className="err">{(output as { err: string }).err}</p>
+                                    <p className="err">Expected output: {neededOutput}</p>
+                                </div>
+                            )
+                        ) : null}
                     </div>
+                </div>
                 )}
             </div>
         );

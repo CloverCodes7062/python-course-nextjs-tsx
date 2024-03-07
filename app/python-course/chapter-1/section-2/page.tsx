@@ -120,6 +120,15 @@ export default function Section2() {
                         pointsWorth={1}
                         neededOutput={''}
                     />
+                    <ProgrammingExercise
+                        questionsCompleted={questionsCompleted}
+                        setQuestionsCompleted={setQuestionsCompleted}
+                        questionNumber={"1-2-2"}
+                        questionTitle={"Program that outputs 5"}
+                        questionDescription={"Write a program that outputs 5 when ran."}
+                        pointsWorth={1}
+                        neededOutput={'5\n'}
+                    />
                     <KeyPointsContainer>
                         <StandardLi>Subtraction, Division, and Floor Division cannot be done to strings</StandardLi>
                         <StandardLi>Multiplying a string by an integer will return the string x times</StandardLi>
