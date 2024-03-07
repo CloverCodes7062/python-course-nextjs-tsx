@@ -15,6 +15,7 @@ interface Props {
 export default function({ setOutput, setRanCode, setRenderLoading }: Props) {
     const editorRef = useRef(null);
     const [code, setCode] = useState('');
+    const [input, setInput] = useState('');
 
     const handleEditorDidMount = (editor: any, monaco: any) => {
         editorRef.current = editor;
@@ -35,7 +36,7 @@ export default function({ setOutput, setRanCode, setRenderLoading }: Props) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ code: code }),
+            body: JSON.stringify({ code: code, input: input }),
         })
 
         const data = await response.json();
@@ -53,6 +54,9 @@ export default function({ setOutput, setRanCode, setRenderLoading }: Props) {
                     onMount={handleEditorDidMount}
                     onChange={handleEditorChange}
                 />
+            </div>
+            <div>
+                <input type="text" value={input} onChange={(e) => setInput(e.target.value)}/>
             </div>
             <div>
                 <button className="p-[7.5px] ml-[10px] mt-[5px] bg-run-blue text-white rounded-lg shadow-lg" onClick={runCode}>

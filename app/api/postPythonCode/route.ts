@@ -4,13 +4,15 @@ export async function POST(req: any, res: any) {
     console.log('postPythonCode called');
 
     const body = await req.json();
-    const { code } = body;
+    const { code, input } = body;
+    console.log('code', code);
+    console.log('input', input);
 
     let output = '';
     let err = '';
 
-    const docker = spawn('docker', ['run', '--rm', '-i', '00e07589691a']);
-    docker.stdin.write(code);
+    const docker = spawn('docker', ['run', '--rm', '-i', 'a9fb2bd0f8a1']);
+    docker.stdin.write(`${code}SPACEFORINPUT${input}`);
     docker.stdin.end();
 
     const promise = new Promise((resolve, reject) => {
