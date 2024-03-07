@@ -20,43 +20,45 @@ interface Props {
 }
 
 export default function ProgrammingExercise({ questionsCompleted, setQuestionsCompleted, questionNumber, questionTitle, questionDescription, pointsWorth, neededOutput }: Props) {
-        const [output, setOutput] = useState(null);
+        const [output, setOutput] = useState<{ result?: string, err?: string } | null>(null);;
         const [renderLoading, setRenderLoading] = useState(true);
         const [ranCode, setRanCode] = useState(false);
         
         useEffect(() => {
             if (output) {
                 setRenderLoading(false);
+
+                if (output.result) {
+                    const checkIfOutputIsValid = async () => {
+                        if (!neededOutput) {
+                            console.log("calling API ROUTE1");
+                            const response = await fetch('http://localhost:3000/api/postQuestionResult', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
+                            });
+                            setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
+                        } else if (neededOutput == output.result) {
+                            console.log("calling API ROUTE2");
+                            const response = await fetch('http://localhost:3000/api/postQuestionResult', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
+                            });
+                            setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
+                        }
+                    }
+
+                    checkIfOutputIsValid();
+                }
             }
         }, [output]);
 
         const isResultOutput = (output: { result?: string, err?: string }): output is { result: string } => {
-            const checkIfOutputSuccessful = async () => {
-                if (output.hasOwnProperty('result')) {
-                    if (!neededOutput) {
-                        const response = await fetch('http://localhost:3000/api/postQuestionResult', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
-                        });
-                        setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
-                    } else if (neededOutput == output.result) {
-                        const response = await fetch('http://localhost:3000/api/postQuestionResult', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ question: questionNumber, points_worth: pointsWorth }),
-                        });
-                        setQuestionsCompleted(prevQuestions => [...prevQuestions, { question: questionNumber, points_worth: pointsWorth }]);
-                    }
-                }
-            }
-    
-            checkIfOutputSuccessful();
-    
             return output.hasOwnProperty('result');
         }
 

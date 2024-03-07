@@ -1,10 +1,6 @@
 'use client';
-import PythonCodeForm from "@/components/PythonCodeForm";
-import { createClient } from "@/utils/supabase/server";
 import { redirect, useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import Head from 'next/head';
-import QuestionLoading from "@/components/QuestionLoading";
 import StandardContainer from "@/components/StandardContainer";
 import Pmt25 from "@/components/Pmt25";
 import Pmt10 from "@/components/Pmt10";
@@ -13,13 +9,15 @@ import StandardLearningObjectivesContainer from "@/components/StandardLearningOb
 import StandardLi from "@/components/StandardLi";
 import KeyPointsContainer from "@/components/KeyPointsContainer";
 import ProgrammingExercise from "@/components/ProgrammingExercise";
+import H1mt50 from "@/components/H1mt50";
+import StandardH1 from "@/components/StandardH1";
 
 interface QuestionCompletedData {
     question: string;
     points_worth: number;
 }
 
-export default function() {
+export default function Section1() {
     const router = useRouter();
 
     const [questionsCompleted, setQuestionsCompleted] = useState<QuestionCompletedData[]>([]);
@@ -56,14 +54,14 @@ export default function() {
         <div>
             <StandardTitleH1>Chapter 1.1: Variables</StandardTitleH1>
             <div className="flex flex-col items-center">
-                <StandardLearningObjectivesContainer>
+                <StandardLearningObjectivesContainer pr={'300'}>
                     <StandardLi>You will understand what a variable is</StandardLi>
                     <StandardLi>You will understand how to create a variable.</StandardLi>
                     <StandardLi>You will understand how to use a variable</StandardLi>
                     <StandardLi>You will understand how to output to the console</StandardLi>
                 </StandardLearningObjectivesContainer>
                 <main className="w-full mt-[40px] mb-[40px]">
-                    <h1 className="text-left text-2xl font-medium">So what is a variable?</h1>
+                    <StandardH1>So what is a variable?</StandardH1>
                     <Pmt10>
                         A variable in programming is almost identical to a variable in algebra, think of them as a <span className="italic font-medium">letter or word</span> that holds a value. Variables can come in many different types, but for now, we'll look at the most basic types.
                     </Pmt10>
@@ -89,7 +87,7 @@ export default function() {
                     <Pmt10>
                         Again, we use the <span className="italic font-medium">assignment operator</span> to give x a value, but this time its <span className="italic font-medium">"cat"</span>. Last time, we assigned it an <span className="italic font-medium">integer</span> so quotes are not needed. Anytime you want to use a string in python, you must use " " or ' ' since unquoted letters/words are seen as variables.
                     </Pmt10>
-                    <h1 className="mt-[50px] text-left text-2xl font-medium">How can we use variables?</h1>
+                    <H1mt50>How can we use variables?</H1mt50>
                     <Pmt10>
                         Variables can be used in several different ways, but for now, we'll talk about using them with the <span className="italic font-medium">assignment operator</span>, and shortly after, <span className="italic font-medium">outputting them</span> (and other values) to the console with <span className="italic font-medium">print()</span>.
                     </Pmt10>

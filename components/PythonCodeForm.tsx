@@ -7,7 +7,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faVial } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
-    setOutput: Dispatch<SetStateAction<null>>;
+    setOutput: Dispatch<SetStateAction<{ result?: string, err?: string } | null>>;
     setRanCode: Dispatch<SetStateAction<boolean>>;
     setRenderLoading: Dispatch<SetStateAction<boolean>>;
 }
