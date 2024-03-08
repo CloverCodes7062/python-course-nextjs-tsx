@@ -103,7 +103,7 @@ export default function ProgrammingExercise({ questionsCompleted, setQuestionsCo
                 <div>
                     <div className="pl-[10px] pr-[10px] mt-[15px] mb-[15px] ml-[10px] mr-[10px] flex items-center justify-between bg-output-gray rounded-lg shadow-lg">
                         <h2 className="text-xl font-medium">Test Results: </h2>
-                        <button className="p-[7.5px] ml-[10px] mt-[5px] mb-[10px] bg-test-gray rounded-lg shadow-lg">
+                        <button className="p-[7.5px] ml-[10px] mt-[5px] mb-[10px] bg-test-gray rounded-lg shadow-lg" onClick={() => setRanCode(false)}>
                             Close
                         </button>
                     </div>
@@ -122,17 +122,25 @@ export default function ProgrammingExercise({ questionsCompleted, setQuestionsCo
                         {output ? (
                             output.result ? (
                                 (output.result == neededOutput || (output.result && !neededOutput)) ? (
-                                    <p className="res">Your output: {output.result}</p>
+                                    <div>
+                                        <p className="res" style={{ whiteSpace: 'pre-wrap' }}>Your output:</p>
+                                        <p className="res" style={{ whiteSpace: 'pre-wrap' }}>{output.result}</p>
+                                    </div>
                                 ) : (
                                     <div>
-                                        <p className="err">Your output: {output.result}</p>
-                                        <p className="err">Expected output: {neededOutput}</p>
+                                        <p className="res" style={{ whiteSpace: 'pre-wrap' }}>Your output:</p>
+                                        <p className="res" style={{ whiteSpace: 'pre-wrap' }}>{output.result}</p>
+                                        <br />
+                                        <p className="err">Needed Output:</p>
+                                        <p className="err">{neededOutput}</p>
                                     </div>
                                 )
                             ) : (
                                 <div>
                                     <p className="err">{(output as { err: string }).err}</p>
-                                    <p className="err">Expected output: {neededOutput}</p>
+                                    <br />
+                                    <p className="err">Needed Output:</p>
+                                    <p className="err">{neededOutput}</p>
                                 </div>
                             )
                         ) : null}

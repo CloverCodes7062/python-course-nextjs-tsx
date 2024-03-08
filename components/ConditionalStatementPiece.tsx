@@ -1,5 +1,5 @@
-export default function ConditionalStatementPiece({ children }: { children: React.ReactNode }) {
+export default function ConditionalStatementPiece({ children, indention = 1 }: { children: React.ReactNode, indention?: number }) {
     return (
-        <p className="indent-[25px] font-medium">{ children }</p>
+        <p className={`ml-[${indention * 25}px] indent-[${indention * 25}px] font-medium`}>{ children }</p>
     );
 }
