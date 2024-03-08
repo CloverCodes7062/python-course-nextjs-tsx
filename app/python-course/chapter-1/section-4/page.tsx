@@ -169,7 +169,7 @@ export default function Section4() {
                     <Pmt25>You made it to the first coding Assignment! This one is simple but requires some first-time setup, download and setup an IDE like Visual Studio Code for Python and come back.</Pmt25>
                     <Pmt10>Now that your IDE is setup, your assignment is to create a very simple calculator using variables, input() and conditional statements.</Pmt10>
                     <Pmt25>Demo video below with sample code for reference:</Pmt25>
-                    <iframe width="800" height="500" src="https://www.youtube.com/embed/slr_hxfuRhk?si=f1R5XX0fZRZisCqG" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                    <iframe width="800" height="500" src="https://www.youtube.com/embed/CSkHzVJzaLw?si=tYUMRotPwu12MNJr" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                 </main>
             </div>
         </div>
