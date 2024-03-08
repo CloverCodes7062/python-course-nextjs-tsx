@@ -122,7 +122,7 @@ export default function Section1() {
                     <Pmt25>Conditional statements can be <Italic>chained</Italic> together.</Pmt25>
                     <Pmt10>Let's Look at an example:</Pmt10>
                     <StandardContainer>
-                        <StandardContainerP>x = 15</StandardContainerP>
+                        <StandardContainerP>x = 16</StandardContainerP>
                         <StandardContainerP>y = 10</StandardContainerP>
                         <ConditionalStatement>
                             <ConditionalStatementStart>{"if x > 20:"}</ConditionalStatementStart>
