@@ -1,6 +1,7 @@
 'use client';
 
 import H1mt50 from "@/components/H1mt50";
+import Italic from "@/components/Italic";
 import KeyPointsContainer from "@/components/KeyPointsContainer";
 import Pmt10 from "@/components/Pmt10";
 import Pmt25 from "@/components/Pmt25";
@@ -62,7 +63,7 @@ export default function Section3() {
                 <main className="w-full mt-[40px] mb-[40px]">
                     <StandardH1>How do we get user input?</StandardH1>
                     <Pmt25>
-                        To get user input in python, we can use input() and assign the result to a variable.
+                        To get user input in python, we can use <Italic>input()</Italic> and assign the result to a variable.
                     </Pmt25>
                     <Pmt10>
                         Let's look at an example of how we can use input() to get user input.
@@ -73,6 +74,7 @@ export default function Section3() {
                     <Pmt25>
                         Once ran, the program will ask the user for an input which will then be assigned to the variable name.
                     </Pmt25>
+                    <Pmt10>Note: if a string is placed inside of input(), input("Enter a name: ") the string will be printed first, with a place for input next to it.</Pmt10>
                     <ProgrammingExercise
                         questionsCompleted={questionsCompleted}
                         setQuestionsCompleted={setQuestionsCompleted}
@@ -85,7 +87,7 @@ export default function Section3() {
                     <Pmt25>
                         Earlier, we talked about different data types in python, (string, integer, float) and you may have noticed that input always returns a string. Which can be tested if you try to add two numbers collected from inputs. To fix this, we must learn about type conversions.
                     </Pmt25>
-                    <H1mt50>What are type conversions and how can we prefrom them?</H1mt50>
+                    <H1mt50>What are type conversions and how can we preform them?</H1mt50>
                     <Pmt10>Type conversions allow you to convert data from one type to another. For example, a string "5" can be converted into integer 5, and integer 5 can be converted into float 5.0.</Pmt10>
                     <Pmt10>Listed below are the most common type conversions, and what they are compatible with.</Pmt10>
                     <StandardContainer>
