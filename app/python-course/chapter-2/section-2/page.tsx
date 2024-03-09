@@ -132,6 +132,7 @@ export default function Section1() {
                         <ConditionalStatementPiece indention={2}>{"break"}</ConditionalStatementPiece>
                         <ConditionalStatementPiece>{"print(user_input)"}</ConditionalStatementPiece>
                     </StandardContainer>
+                    <Pmt10>Note: since a while loop executed until the expression is False, a while True loop will never end; it has to be manual ended with <Italic>break</Italic>.</Pmt10>
                     <Pmt25>
                         This is code run and print user_input until the user enters -1. When the user enters -1, the if statement executes, prints "You entered -1", and <Italic>immediately</Italic> breaks, meaning that all code below the <Italic>break</Italic> does not execute.
                     </Pmt25>
@@ -180,6 +181,30 @@ export default function Section1() {
                         pointsWorth={3}
                         neededOutput={'sdasdadd'}
                     />
+                    <H1mt50>Continue</H1mt50>
+                    <Pmt25>
+                        Last topic, <Italic>continue</Italic>. Imagine that we want to add all numbers from 1 to 100 using a loop.
+                    </Pmt25>
+                    <StandardContainer>
+                        <ConditionalStatementStart>{"for i in range(1, 101)"}</ConditionalStatementStart>
+                        <ConditionalStatementPiece>{"print(i)"}</ConditionalStatementPiece>
+                    </StandardContainer>
+                    <Pmt25>But what if we wanted to skip numbers divisible by 5?</Pmt25>
+                    <StandardContainer>
+                        <ConditionalStatementStart>{"for i in range(1, 101):"}</ConditionalStatementStart>
+                        <ConditionalStatementStart indention={1}>{"if i % 5 != 0:"}</ConditionalStatementStart>
+                        <ConditionalStatementPiece indention={2}>{"print(i)"}</ConditionalStatementPiece>
+                    </StandardContainer>
+                    <Pmt25>
+                        We can also do the same thing using <Italic>continue</Italic>. When continue is executed, the code returns back to the top of the loop.
+                    </Pmt25>
+                    <StandardContainer>
+                        <ConditionalStatementStart>{"for i in range(1, 101):"}</ConditionalStatementStart>
+                        <ConditionalStatementStart indention={1}>{"if i % 5 == 0:"}</ConditionalStatementStart>
+                        <ConditionalStatementPiece indention={2}>{"continue"}</ConditionalStatementPiece>
+                        <ConditionalStatementPiece indention={1}>{"print(i)"}</ConditionalStatementPiece>
+                    </StandardContainer>
+                    <Pmt25>In both programs, numbers divisible by 5 are skipped.</Pmt25>
                 </main>
             </div>
         </div>

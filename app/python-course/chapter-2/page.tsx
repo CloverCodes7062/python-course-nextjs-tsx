@@ -32,6 +32,11 @@ export default async function() {
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 2: Simple Loops;</span> What is a loop?</p>
                         </li>
                     </a>
+                    <a href="/python-course/chapter-2/section-3"> 
+                        <li>
+                            <p className="m-[15px] text-lg"><span className="font-semibold">Section 2: More Data Structures and More Loops;</span> A showcase of more data structures (list, dict)</p>
+                        </li>
+                    </a>
                 </ul>
             </div>
         </div>

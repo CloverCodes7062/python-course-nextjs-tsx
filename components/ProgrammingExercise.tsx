@@ -90,7 +90,7 @@ export default function ProgrammingExercise({ questionsCompleted, setQuestionsCo
                     </div>
                 </div>
                 <div className="p-[10px] pl-[25px] pb-[20px]">
-                    <p className="text-pretty mt-[10px] text-lg w-[700px]">{questionDescription}</p>
+                    <p className="text-pretty mt-[10px] text-lg w-[700px]" style={{ whiteSpace: 'pre-wrap' }}>{questionDescription}</p>
                 </div>
     
                 <div>
