@@ -250,6 +250,11 @@ export default function Section1() {
                         pointsWorth={4}
                         neededOutput={''}
                     />
+                    <H1mt50>Coding Assignment</H1mt50>
+                    <Pmt25>
+                        Let's look back at the basic calculator we made in chapter 1. Make the calculator run until the user enters STOP.
+                    </Pmt25>
+                    <Pmt10>Your calculator should have similar functionality to the one in the showcase below.</Pmt10>
                 </main>
             </div>
         </div>
