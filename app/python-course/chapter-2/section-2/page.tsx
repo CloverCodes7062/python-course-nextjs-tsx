@@ -132,7 +132,9 @@ export default function Section1() {
                         <ConditionalStatementPiece indention={2}>{"break"}</ConditionalStatementPiece>
                         <ConditionalStatementPiece>{"print(user_input)"}</ConditionalStatementPiece>
                     </StandardContainer>
-                    <Pmt10>Note: since a while loop executed until the expression is False, a while True loop will never end; it has to be manual ended with <Italic>break</Italic>.</Pmt10>
+                    <Pmt10>
+                        Note: since a while loop executed until the expression is False, a while True loop will never end; it has to be manual ended with <Italic>break</Italic>.
+                    </Pmt10>
                     <Pmt25>
                         This is code run and print user_input until the user enters -1. When the user enters -1, the if statement executes, prints "You entered -1", and <Italic>immediately</Italic> breaks, meaning that all code below the <Italic>break</Italic> does not execute.
                     </Pmt25>

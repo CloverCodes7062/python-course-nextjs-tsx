@@ -74,7 +74,7 @@ export default function Section1() {
                     </StandardContainer>
                     <Pmt25>From the example above, you can see that lists are a great, <Italic>concise</Italic> way to group items together. But how do we access them?</Pmt25>
                     <H1mt50>List Indexing</H1mt50>
-                    <Pmt25>Lists in Python are <Italic>0-indexed</Italic>, meaning that all items have an <Italic>index</Italic> from 0 to n (length of list - 1).</Pmt25>
+                    <Pmt25>Lists in Python are <Italic>0-indexed</Italic>, meaning that all items have an <Italic>index</Italic> from 0 to n - 1 (length of list - 1).</Pmt25>
                     <Pmt10>Let's look at an example of <Italic>list indexing</Italic>.</Pmt10>
                     <StandardContainer>
                         <StandardContainerP>fruits = ["orange", "apple", "pear"]</StandardContainerP>
