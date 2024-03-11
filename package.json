@@ -14,9 +14,11 @@
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.17",
     "geist": "^1.2.1",
+    "lodash": "^4.17.21",
     "monaco-editor": "^0.46.0",
     "next": "latest",
     "next-video": "^0.16.0",
+    "parse5": "^7.1.2",
     "postcss": "8.4.33",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -24,6 +26,7 @@
     "typescript": "5.3.3"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",

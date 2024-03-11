@@ -115,7 +115,7 @@ export default function Section1() {
                     </Pmt25>
                     <H1mt50>In-line Styling</H1mt50>
                     <Pmt25>
-                        Earier, we mentioned <Italic>in-line styling</Italic>, so what is it? In-line styling is a way to style HTML without a seperate <Italic>stylesheet</Italic> (we'll discuss stylesheets in a moment).
+                        Earier, we mentioned <Italic>in-line styling</Italic>, so what is it? In-line styling is a way to style HTML without a seperate <Italic>Style Sheet</Italic> (we'll discuss Style Sheets in a moment).
                     </Pmt25>
                     <Pmt10>
                         Using in-line styling is easy, inside of an element just use style="" and start writing css rules. In-line styling is usually frowned upon as it is <Italic>not</Italic> easily reuable, which does not adhere to our philosophy <Italic>"Don't repeat yourself"</Italic>.
@@ -124,9 +124,84 @@ export default function Section1() {
                         Look at our h1 element above, it has two rules, "color: red;" and "text-align: center;". Imagine we wanted to give our p element the same rules, we'd have to copy-paste them, <Italic>repeating</Italic> ourselfs unnecessarily.
                     </Pmt10>
                     <Pmt10>
-                        This is why using a seperate <Italic>stylesheet</Italic> is recommended. A seperate stylesheet allows you to give elements Ids and classes, and style them, styling groups of elements at once.
+                        This is why using a seperate <Italic>Style Sheet</Italic> is recommended. A seperate Style Sheet allows you to give elements Ids and classes, and style them, styling groups of elements at once.
                     </Pmt10>
-                    <H1mt50>How do we make a stylesheet?</H1mt50>
+                    <H1mt50>How do we make a Style Sheet?</H1mt50>
+                    <Pmt25>{`To make an external Style Sheet, create a seperate file ending in .css (styles.css) and link it in our <head> element using a link element.`}</Pmt25>
+                    <Pmt25>Link Element Example:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>
+                            {`<link rel="stylesheet" href="styles.css">`}
+                        </StandardContainerP>
+                    </StandardContainer>
+                    <Pmt10>Note: The rel must be set to "stylesheet", it stands for <Italic>relationship</Italic>.</Pmt10>
+                    <Pmt10>
+                        Note: The href is the location of the .css file, without a file path, it will assume that the .css file is in the same directory as the html file.
+                    </Pmt10>
+                    <H1mt50>How are Style Sheets structured?</H1mt50>
+                    <Pmt25>Style Sheets are structured in the following format <Italic>identifier attribute: property; (rule)</Italic>.</Pmt25>
+                    <Pmt25>Let's look at an example:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>{"h2 {"}</StandardContainerP>
+                        <StandardContainerP>{"\u00A0\u00A0\u00A0\u00A0color: red;"}</StandardContainerP>
+                        <StandardContainerP>{"}"}</StandardContainerP>
+                    </StandardContainer>
+                    <Pmt10>
+                        {`Note: Our rule still works the same way as {color: red;}, but the proper syntax has been listed above.`}
+                    </Pmt10>
+                    <Pmt25>
+                        The rule above will set the color of <Italic>every</Italic> h2 element in the document to <Italic>red</Italic>; as it uses an element as the <Italic>identifier</Italic>.
+                    </Pmt25>
+                    <Pmt25>Try using an element identifier to style all p elements:</Pmt25>
+                    <HTMLViewer 
+                        htmlCode={'<!DOCTYPE html>\n<html>\n<head>\n\t<title>Page Title</title>\n</head>\n<body>\n\t<h1">This is a Heading</h1>\n\t<div>\n\t\t<h2>This is an H2</h2>\n\t\t<p>This is a paragraph</p>\n\t</div>\n\t<p>This is another paragraph</p>\n</body>\n</html>'}
+                        useStyleSheet={true}
+                    />
+                    <H1mt50>What is a class in CSS?</H1mt50>
+                    <Pmt25>What if we only wanted to style certain p elements? Then, we could use a <Italic>class</Italic>.</Pmt25>
+                    <Pmt25>Let's look at an example of an element with a class:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>{`<p class="centered-red-p">This is a paragraph</p>`}</StandardContainerP>
+                    </StandardContainer>
+                    <Pmt25>And let's style the class in a .css file:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>{".centered-red-p {"}</StandardContainerP>
+                        <StandardContainerP>{"\u00A0\u00A0\u00A0\u00A0color: red;"}</StandardContainerP>
+                        <StandardContainerP>{"\u00A0\u00A0\u00A0\u00A0text-align: center;"}</StandardContainerP>
+                        <StandardContainerP>{"}"}</StandardContainerP>
+                    </StandardContainer>
+                    <Pmt25>The Style Sheet above will style all elements with the class "centered-red-p".</Pmt25>
+                    <Pmt25>Let's look at it in action:</Pmt25>
+                    <HTMLViewer 
+                        htmlCode={'<!DOCTYPE html>\n<html>\n<head>\n\t<title>Page Title</title>\n</head>\n<body>\n\t<h1>This is a Heading</h1>\n\t<div>\n\t\t<h2>This is an H2</h2>\n\t\t<p class="centered-red-p">This is a paragraph</p>\n\t</div>\n\t<p>This is another paragraph</p>\n\t<p class="centered-red-p">This is a third paragraph</p>\n</body>\n</html>'}
+                        useStyleSheet={true}
+                        initalCssCode={`.centered-red-p { color: red; text-align: center; }`}
+                    />
+                    <Pmt25>We can see that only the elements with the class got styled.</Pmt25>
+                    <H1mt50>What is an ID in CSS?</H1mt50>
+                    <Pmt25>
+                        Imagine this, we have a single element that we want to style; we could use classes or in-line styling but classes are geared towards <Italic>groups</Italic> of elements and in-line styling is not <Italic>identifiable</Italic>. In this case, we should use an <Italic>id</Italic>.
+                    </Pmt25>
+                    <Pmt25>Let's look at an element with an id:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>{`<p id="first-p">This is a paragraph</p>`}</StandardContainerP>
+                    </StandardContainer>
+                    <Pmt10>
+                        Now, our element is <Italic>identifiable</Italic> and we can style it using a <Italic>external styling</Italic>.
+                    </Pmt10>
+                    <Pmt25>Let's look at how to style an id:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>{"#first-p {"}</StandardContainerP>
+                        <StandardContainerP>{"\u00A0\u00A0\u00A0\u00A0color: red;"}</StandardContainerP>
+                        <StandardContainerP>{"}"}</StandardContainerP>
+                    </StandardContainer>
+                    <Pmt25>As seen above, to style an id, we prefix the identifier with a <Italic>#</Italic>.</Pmt25>
+                    <KeyPointsContainer>
+                        <StandardLi>There are three ways to use css with html; <Italic>in-line, internal, or external.</Italic></StandardLi>
+                        <StandardLi>Rules are formatted as <Italic>attribute: property;.</Italic></StandardLi>
+                        <StandardLi>Classes are for groups, Ids are <Italic>unique</Italic> and to be used on a single element.</StandardLi>
+                        <StandardLi>If there is no prefix on an identifier, it will assume the identifier is for an element, a dot is for classes, and a hashtag represents an Id.</StandardLi>
+                    </KeyPointsContainer>
                 </main>
             </div>
         </div>
