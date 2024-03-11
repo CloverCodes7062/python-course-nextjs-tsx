@@ -32,6 +32,11 @@ export default async function() {
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 2: Functions;</span> What they are and how they work</p>
                         </li>
                     </a>
+                    <a href="/python-course/chapter-3/section-2a">
+                        <li>
+                            <p className="m-[15px] text-lg"><span className="font-semibold">Section 2.a: Basic Web Development;</span> What is HTML, CSS, and Flask?</p>
+                        </li>
+                    </a>
                     <a href="/python-course/chapter-3/section-3">
                         <li>
                             <p className="m-[15px] text-lg"><span className="font-semibold">Section 3: Formatting;</span> How can we format print statements?</p>
