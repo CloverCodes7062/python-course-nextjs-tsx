@@ -10,10 +10,10 @@ export default function HTMLViewer({ htmlCode }: Props) {
     const [replacedHtmlCode, setReplacedHtmlCode] = useState('');
 
     const replaceTags = (html: string) => {
-        let replacedHtml = html.replace(/<h1>/g, '<h1 class="font-semibold text-2xl mb-[15px]">');
-        replacedHtml = replacedHtml.replace(/<h2>/g, '<h2 class="font-semibold text-lg mb-[10px]">');
-        replacedHtml = replacedHtml.replace(/<h3>/g, '<h3 class="font-semibold text-medium mb-[25px]">');
-        replacedHtml = replacedHtml.replace(/<p>/g, '<p class="text-base mb-[5px]">');
+        let replacedHtml = html.replace(/<h1\s*(style="[^"]*")?([^>]*)>/g, '<h1 class="font-semibold text-2xl mb-[15px]" $1$2>');
+        replacedHtml = replacedHtml.replace(/<h2\s*(style="[^"]*")?([^>]*)>/g, '<h2 class="font-semibold text-lg mb-[10px]" $1$2>');
+        replacedHtml = replacedHtml.replace(/<h3\s*(style="[^"]*")?([^>]*)>/g, '<h3 class="font-semibold text-medium mb-[25px]" $1$2>');
+        replacedHtml = replacedHtml.replace(/<p\s*(style="[^"]*")?([^>]*)>/g, '<p class="text-base mb-[5px]" $1$2>');
         return replacedHtml;
     }
 
