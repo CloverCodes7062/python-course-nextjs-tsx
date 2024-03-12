@@ -16,6 +16,7 @@ import StandardH1 from "@/components/StandardH1";
 import StandardLearningObjectivesContainer from "@/components/StandardLearningObjectivesContainer";
 import StandardLi from "@/components/StandardLi";
 import StandardTitleH1 from "@/components/StandardTitleH1";
+import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 
@@ -195,7 +196,7 @@ export default function Section1() {
                     </Pmt10>
                     <H1mt50>URL Parameters</H1mt50>
                     <Pmt25>
-                        Earlier, we mentioned that we can use a back-end to <Italic>generate dynamic content</Italic>. URL's often have something like this in them "?query=(param)", this is a URL Parameter.
+                        Earlier, we mentioned that we can use a back-end to <Italic>generate dynamic content</Italic>
                     </Pmt25>
                     <Pmt10>URL Parameters can be passed to a back-end, just like <Italic>variables</Italic>.</Pmt10>
                     <Pmt25>Let's look at an example of a URL Parameter:</Pmt25>
@@ -212,6 +213,36 @@ export default function Section1() {
                         <StandardContainerP>if __name__ == "__main__":</StandardContainerP>
                         <ConditionalStatementPiece>app.run(debug=True)</ConditionalStatementPiece>
                     </StandardContainer>
+                    <Pmt25>
+                        {`Now, we can visit "/home" or "/home/(anyname)" and that name will be passed to our html file and <Italic>rendered</Italic> inside of {{ name }}.`}
+                    </Pmt25>
+                    <Pmt25>Let's look at our new html file:</Pmt25>
+                    <br />
+                    <img src='https://i.imgur.com/4HidUpb.png' />
+                    <Pmt25>
+                        We can see that we have <Italic>code</Italic> in our html file! This code checks if name has been passed to it, if it has, then it renders name inside of an h2 element.
+                    </Pmt25>
+                    <H1mt50>Query Parameters</H1mt50>
+                    <Pmt25>URL's often have something like this in them "?color=red&name=john", this is a Query Parameter.</Pmt25>
+                    <Pmt25>Let's look at an example of how to <Italic>access</Italic> query parameters:</Pmt25>
+                    <StandardContainer>
+                        <StandardContainerP>from flask import Flask, render_template, redirect, url_for</StandardContainerP>
+                        <br />
+                        <StandardContainerP>app = Flask(__name__)</StandardContainerP>
+                        <br />
+                        <StandardContainerP>{`@app.route("/home")`}</StandardContainerP>
+                        <StandardContainerP>def home():</StandardContainerP>
+                        <ConditionalStatementPiece>name = request.args.get('name')</ConditionalStatementPiece>
+                        <ConditionalStatementPiece>color = request.args.get('color')</ConditionalStatementPiece>
+                        <ConditionalStatementPiece>return render_template("home.html", name=name, color=color)</ConditionalStatementPiece>
+                        <br />
+                        <StandardContainerP>if __name__ == "__main__":</StandardContainerP>
+                        <ConditionalStatementPiece>app.run(debug=True)</ConditionalStatementPiece>
+                    </StandardContainer>
+                    <br />
+                    <Pmt25>And our updated html file:</Pmt25>
+                    <img src='https://i.imgur.com/q3ysA9U.png' />
+                    <Pmt25>When you visit a URL using query parameters, you are making a <Italic>GET</Italic> request.</Pmt25>
                 </main>
             </div>
         </div>

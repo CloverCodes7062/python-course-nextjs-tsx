@@ -69,7 +69,7 @@ export default function Section1() {
                 <main className="w-full mt-[40px] mb-[40px]">
                     <StandardH1>What is HTML?</StandardH1>
                     <Pmt25>
-                        <Italic>HTML</Italic> stands for <Italic>Hypertext Markup Language</Italic>, it describes the <Italic>structure</Italic> of a website using elements; and it used on over 95% of websites.
+                        <Italic>HTML</Italic> stands for <Italic>Hypertext Markup Language</Italic>, it defines the <Italic>structure</Italic> of a website using elements; and it used on over 95% of websites.
                     </Pmt25>
                     <Pmt25>
                         {`Elements have an opening tag (<h1>), content (Website Header), and a closing tag (</h1>); <h1>Website Header</h1>`}
