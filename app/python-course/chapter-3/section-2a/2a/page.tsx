@@ -115,11 +115,12 @@ export default function Section1() {
                     </Pmt25>
                     <H1mt50>In-line Styling</H1mt50>
                     <Pmt25>
-                        Earier, we mentioned <Italic>in-line styling</Italic>, so what is it? In-line styling is a way to style HTML without a seperate <Italic>Style Sheet</Italic> (we'll discuss Style Sheets in a moment).
+                        Earlier, we mentioned <Italic>in-line styling</Italic>, so what is it? In-line styling is a way to style HTML without a seperate <Italic>Style Sheet</Italic> (we'll discuss Style Sheets in a moment).
                     </Pmt25>
                     <Pmt10>
-                        Using in-line styling is easy, inside of an element just use style="" and start writing css rules. In-line styling is usually frowned upon as it is <Italic>not</Italic> easily reuable, which does not adhere to our philosophy <Italic>"Don't repeat yourself"</Italic>.
+                        Using in-line styling is easy, inside of an element's opening tag just type style="" and start writing css rules. In-line styling is usually frowned upon as it is <Italic>not</Italic> easily reuable, which does not adhere to our philosophy <Italic>"Don't repeat yourself"</Italic>.
                     </Pmt10>
+                    <Pmt10>Note: In-line styling is also not <Italic>identifiable</Italic>.</Pmt10>
                     <Pmt10>
                         Look at our h1 element above, it has two rules, "color: red;" and "text-align: center;". Imagine we wanted to give our p element the same rules, we'd have to copy-paste them, <Italic>repeating</Italic> ourselfs unnecessarily.
                     </Pmt10>
