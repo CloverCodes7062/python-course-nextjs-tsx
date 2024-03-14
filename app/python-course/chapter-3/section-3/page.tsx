@@ -44,7 +44,7 @@ export default function Section1() {
             if (!alreadySetQuestions.current) {
                 alreadySetQuestions.current = true;
 
-                const questionsCompletedRes = await fetch('http://localhost:3000/api/getCompletedQuestions?chapterSection=3-3a');
+                const questionsCompletedRes = await fetch('http://localhost:3000/api/getCompletedQuestions?chapterSection=3-3');
                 const questionsCompletedData = await questionsCompletedRes.json();
 
                 console.log('questionsCompletedData?.questionsCompleted', questionsCompletedData?.questionsCompleted);
@@ -65,7 +65,7 @@ export default function Section1() {
             <div className="flex flex-col items-center">
                 <StandardLearningObjectivesContainer pr={'250'}>
                     <StandardLi>You will understand what an <Italic>F-String</Italic> is.</StandardLi>
-                    <StandardLi>You will under the different ways to print a string.</StandardLi>
+                    <StandardLi>You will understand the different ways to print a string.</StandardLi>
                 </StandardLearningObjectivesContainer>
                 <main className="w-full mt-[40px] mb-[40px]">
                     <H1mt50>What is an F-String?</H1mt50>
