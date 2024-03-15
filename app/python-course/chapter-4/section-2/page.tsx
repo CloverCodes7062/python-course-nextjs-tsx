@@ -44,7 +44,7 @@ export default function Section1() {
             if (!alreadySetQuestions.current) {
                 alreadySetQuestions.current = true;
 
-                const questionsCompletedRes = await fetch('http://localhost:3000/api/getCompletedQuestions?chapterSection=3-4');
+                const questionsCompletedRes = await fetch('http://localhost:3000/api/getCompletedQuestions?chapterSection=4-2');
                 const questionsCompletedData = await questionsCompletedRes.json();
 
                 console.log('questionsCompletedData?.questionsCompleted', questionsCompletedData?.questionsCompleted);

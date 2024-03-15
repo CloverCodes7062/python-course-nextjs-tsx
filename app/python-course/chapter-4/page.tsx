@@ -34,7 +34,7 @@ export default async function() {
                     </a>
                     <a href="/python-course/chapter-4/section-3">
                         <li>
-                            <p className="m-[15px] text-lg"><span className="font-semibold">Section 3: Formatting;</span> How can we format print statements?</p>
+                            <p className="m-[15px] text-lg"><span className="font-semibold">Section 3: Classes and Objects;</span> What is a Class? What is an Object?</p>
                         </li>
                     </a>
                     <a href="/python-course/chapter-4/section-4">
