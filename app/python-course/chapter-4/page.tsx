@@ -39,7 +39,7 @@ export default async function() {
                     </a>
                     <a href="/python-course/chapter-4/section-4">
                         <li>
-                            <p className="m-[15px] text-lg"><span className="font-semibold">Section 4: Tuples, and References;</span> What is a Tuple, what is a reference?</p>
+                            <p className="m-[15px] text-lg"><span className="font-semibold">Section 4: Recursion;</span> What is recursion?</p>
                         </li>    
                     </a>
                 </ul>
